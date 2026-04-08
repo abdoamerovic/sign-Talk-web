@@ -366,4 +366,122 @@ export default {
   box-shadow: 0 6px 12px rgba(0,0,0,0.25);
   border-color: var(--secondary-color);
 }
+@media  (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    padding: 20px;
+  }
+  /* ================= MOBILE RESPONSIVE ================= */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    height: auto;
+    padding: 15px;
+  }
+
+  .form_1,
+  .form_2 {
+    width: 100%;
+    height: auto;
+    margin-bottom: 15px;
+  }
+
+  .form_1 {
+    text-align: center;
+    padding: 10px;
+  }
+
+  .form_1 h3 {
+    margin-top: 10px;
+    font-size: 18px;
+  }
+
+  .form_1 h2 {
+    font-size: 16px;
+  }
+
+  .form_1 p {
+    font-size: 13px;
+  }
+
+  .form_1 img {
+    width: 150px;
+    height: 150px;
+  }
+
+  .form_2 {
+    padding: 15px;
+  }
+
+  .form_2 h1 {
+    font-size: 20px;
+  }
+
+  .labele {
+    font-size: 16px;
+  }
+
+  .ptn_1,
+  .ptn_2,
+  .google-btn,
+  .Apple-btn {
+    width: 100%;
+    font-size: 16px;
+  }
+
+  .signup-link {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .signup-link a {
+    margin-left: 0;
+  }
+}
+
+/* ================= SMALL PHONES ================= */
+@media (max-width: 480px) {
+  .form_2 h1 {
+    font-size: 18px;
+  }
+
+  .form_1 img {
+    width: 120px;
+    height: 120px;
+  }
+
+  .ptn_1,
+  .ptn_2 {
+    padding: 10px;
+  }
+}
+
+  .form_1, .form_2 {
+    width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+  }
+
+  .form_1 h3, .form_2 h3 {
+    font-size: 24px;
+    margin-top: 10%;
+  }
+
+  .form_1 h2 {
+    font-size: 16px;
+    margin-top: 10px;
+  }
+
+  .form_1 p, .form_2 p {
+    font-size: 12px;
+    margin-top: 10px;
+  }
+
+  .form_1 img {
+    width: 150px;
+    height: 150px;
+    margin-top: 15px;
+
+}
+}
 </style>
