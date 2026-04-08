@@ -1,0 +1,332 @@
+:root {
+  --primary-color: #007bff; /* أزرق أساسي */
+  --secondary-color: #00bfff; /* أزرق فاتح */
+  --accent-color: #e3a81f; /* بنى فاتح */
+  --bg-color: #ffffff; /* خلفية بيضاء */
+  --text-color: #545454; /* نص داكن */
+}
+body {
+  background: linear-gradient(
+    to left,
+    var(--primary-color),
+    var(--secondary-color),
+    var(--primary-color)
+  );
+  color: var(--text-color);
+  font-family: Arial, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.header {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: auto;
+  padding: 2px 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  box-shadow: 4px 8px 8px rgba(88, 155, 255, 0.543);
+  z-index: 1000;
+}
+.header .logo {
+  height: 60px;
+  width: auto;
+}
+.burger {
+  display: none;
+  font-size: 28px;
+  cursor: pointer;
+  user-select: none;
+}
+.header nav a {
+  text-decoration: none;
+  color: var(--text-color);
+  margin: 0 15px;
+  font-size: 16px;
+  font-weight: bold;
+}
+.header nav a:hover {
+  color: var(--accent-color);
+  transition:
+    background-color 0.6s,
+    color 0.5s;
+  border-bottom: 4px solid var(--primary-color);
+  font-size: 20px;
+}
+.header nav a.active {
+  color: var(--accent-color);
+  transition:
+    background-color 0.6s,
+    color 0.5s;
+  border-bottom: 4px solid var(--primary-color);
+  font-size: 20px;
+}
+
+.side_manu {
+  position: fixed;
+  top: 60px;
+  right: -250px;
+  width: 180px;
+  height: auto;
+  background-color: #fff;
+  box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px;
+  gap: 15px;
+  transition: right 0.4s ease;
+  z-index: 999;
+}
+
+.side_manu a.active {
+  background-color: var(--primary-color);
+  color: #fff;
+}
+.side_manu a {
+  text-decoration: none;
+  color: var(--primary-color);
+  font-size: 18px;
+  font-weight: bold;
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: 10px 0;
+  border-radius: 5px;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+.contianer {
+  width: 100%;
+  margin-top: 80px;
+
+  display: flex;
+  flex-direction: row;
+}
+.leftpart {
+  margin-top: 20px;
+  width: 60%;
+  float: left;
+  display: block;
+  position: relative;
+}
+
+.big_img {
+  width: 50%;
+  height: 500px;
+  position: relative;
+
+  box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  border: 2px solid var(--accent-color);
+  align-items: center;
+  justify-content: center;
+  display: block;
+  margin-left: 20%;
+}
+
+#up,
+#down {
+  box-shadow: 4px 8px 12px var(--accent-color);
+  width: 45px;
+  height: 45px;
+  position: absolute;
+  border-radius: 50%;
+  z-index: 10;
+  animation: move 6s linear infinite;
+}
+#up {
+  left: 84%;
+  top: 1%;
+}
+#down {
+  left: 27%;
+  top: 96%;
+}
+@keyframes move {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+.return {
+  width: 80px;
+  height: 35px;
+  background-color: var(--bg-color);
+  border-radius: 8px;
+  color: var(--primary-color);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  position: fixed;
+  top: 110px;
+  left: 20px;
+  z-index: 1000;
+}
+.return a {
+  text-decoration: none;
+  color: var(--primary-color);
+  font-size: 19px;
+  font-weight: bold;
+}
+.return a:hover {
+  color: var(--accent-color);
+  transition:
+    background-color 0.6s,
+    color 0.5s;
+}
+.rightpart {
+  width: 39%;
+
+  float: right;
+  display: block;
+  margin-left: -4%;
+}
+.rightpart h1 {
+  background: linear-gradient(to right, var(--bg-color), var(--primary-color), var(--accent-color));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 44px;
+}
+.rightpart h3 {
+  font-size: 27px;
+  font-family: 'Bungee Spice', sans-serif;
+  color: var(--accent-color);
+}
+.rightpart p {
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--bg-color);
+}
+.p_1,
+.p_2,
+.p_3 {
+  width: 100%;
+  height: 70px;
+  font-size: 10px;
+  font-weight: bold;
+  background-color: var(--bg-color);
+  box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  margin-bottom: 9px;
+}
+.p_1_2,
+.p_2_2,
+.p_3_2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 5px;
+}
+.p_1_2 p,
+.p_2_2 p,
+.p_3_2 p {
+  color: var(--accent-color);
+  font-size: 14px;
+  font-weight: normal;
+}
+
+#pic {
+  width: 35px;
+  height: 32px;
+  margin-left: 10px;
+  margin-top: 20px;
+  box-shadow: 2px 4px 12px var(--accent-color);
+  border-radius: 50%;
+}
+.p_1:hover,
+.p_2:hover,
+.p_3:hover {
+  background-color: var(--primary-color);
+  color: #fff;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+  margin: 10px;
+}
+@media (max-width: 430px) {
+  .header {
+    width: 100%;
+  }
+
+  /* اخفي كل روابط الهيدر */
+  .header nav a {
+    display: none;
+  }
+
+  .burger {
+    display: block;
+    margin-left: 40%;
+  }
+
+  .side_manu {
+    position: absolute;
+    top: 50px;
+    right: -200px;
+    width: 160px;
+    padding: 10px;
+    gap: 10px;
+    background: white;
+    transition: 0.3s;
+  }
+
+  .side_manu.active {
+    right: 5px;
+  }
+
+  .side_manu a {
+    font-size: 16px;
+    padding: 8px 0;
+    display: block;
+  }
+
+  .side_manu a.active {
+    background-color: var(--secondary-color);
+    color: #fff;
+    border-radius: 6px;
+  }
+  .contianer {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+  }
+  .leftpart {
+    width: 100%;
+    margin-top: 20px;
+  }
+  .big_img {
+    width: 80%;
+    height: auto;
+  }
+  .leftpart,
+  .rightpart {
+    width: 100%;
+    display: block;
+    justify-content: center;
+    text-align: center;
+    margin-left: 1%;
+  }
+  .leftpart img {
+    margin-left: 6%;
+  }
+  #up {
+    left: 75%;
+    top: 1%;
+  }
+  #down {
+    left: 0.5%;
+    top: 98%;
+  }
+}

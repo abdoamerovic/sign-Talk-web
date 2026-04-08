@@ -1,0 +1,326 @@
+:root {
+  --primary-color: #007bff; /* أزرق أساسي */
+  --secondary-color: #00bfff; /* أزرق فاتح */
+  --accent-color: #e3a81f; /* بنى فاتح */
+  --bg-color: #ffffff; /* خلفية بيضاء */
+  --text-color: #545454; /* نص داكن */
+}
+body {
+  background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+  color: var(--text-color);
+  font-family: Arial, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.header {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: auto;
+  padding: 2px 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  box-shadow: 4px 8px 8px rgba(88, 155, 255, 0.543);
+  z-index: 1000;
+}
+.header .logo {
+  height: 60px;
+  width: auto;
+}
+.burger {
+  display: none;
+  font-size: 28px;
+  cursor: pointer;
+  user-select: none;
+}
+.header nav a {
+  text-decoration: none;
+  color: var(--text-color);
+  margin: 0 15px;
+  font-size: 16px;
+  font-weight: bold;
+}
+.header nav a:hover {
+  color: var(--accent-color);
+  transition:
+    background-color 0.6s,
+    color 0.5s;
+  border-bottom: 4px solid var(--primary-color);
+  font-size: 20px;
+}
+.header nav a.active {
+  color: var(--accent-color);
+  transition:
+    background-color 0.6s,
+    color 0.5s;
+  border-bottom: 4px solid var(--primary-color);
+  font-size: 20px;
+}
+
+.side_manu {
+  position: fixed;
+  top: 60px;
+  right: -200px;
+  width: 180px;
+  height: auto;
+  background-color: #fff;
+  box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px;
+  gap: 15px;
+  transition: right 0.4s ease;
+  z-index: 999;
+}
+
+.side_manu a.active {
+  background-color: var(--primary-color);
+  color: #fff;
+}
+.side_manu a {
+  text-decoration: none;
+  color: var(--primary-color);
+  font-size: 18px;
+  font-weight: bold;
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: 10px 0;
+  border-radius: 5px;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+.return {
+  width: auto;
+  height: 35px;
+  padding: 5px 10px;
+  background-color: var(--bg-color);
+  border-radius: 8px;
+  color: var(--primary-color);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  position: fixed;
+  top: 88px;
+  left: 20px;
+  z-index: 1000;
+}
+.return a {
+  text-decoration: none;
+  color: var(--primary-color);
+  font-size: 19px;
+  font-weight: bold;
+}
+.return a:hover {
+  color: var(--accent-color);
+  transition:
+    background-color 0.6s,
+    color 0.5s;
+}
+.bar {
+  width: 50%;
+  margin-left: 25%;
+  height: 60px;
+  padding: 8px 0;
+  background-color: var(--bg-color);
+  box-shadow: 0 -4px 8px var(--secondary-color);
+  position: fixed;
+  top: 80px;
+  left: 0;
+
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 20px;
+
+  z-index: 1000;
+  border: 2px solid var(--primary-color);
+  border-radius: 25px;
+
+  font:
+    500 18px 'Segoe UI',
+    Tahoma,
+    Geneva,
+    Verdana,
+    sans-serif;
+}
+
+.nav_1,
+.nav_2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 15px;
+  cursor: pointer;
+  color: var(--primary-color);
+}
+
+.nav_1:hover,
+.nav_2:hover {
+  color: var(--accent-color);
+}
+
+.contant {
+  margin-top: 160px;
+  padding: 20px 40px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+
+  gap: 30px;
+}
+
+.card {
+  flex: 0 1 160px;
+  max-width: 160px;
+
+  background-color: var(--bg-color);
+  border-radius: 15px;
+  box-shadow: 0 4px 8px var(--secondary-color);
+  color: var(--primary-color);
+
+  padding: 20px;
+  text-align: center;
+
+  font:
+    600 18px 'Segoe UI',
+    Tahoma,
+    Geneva,
+    Verdana,
+    sans-serif;
+  border: var(--accent-color) 2px solid;
+
+  transition: all 0.4s ease;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 6px 12px var(--accent-color);
+}
+
+.card img {
+  width: 70px;
+  height: 70px;
+}
+
+.contant_2 {
+  margin-top: 200px;
+  padding: 20px 40px;
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+
+  gap: 30px;
+  display: none;
+}
+
+.card_2 {
+  flex: 0 1 160px;
+  max-width: 180px;
+
+  background-color: var(--bg-color);
+  border-radius: 15px;
+  box-shadow: 0 4px 8px var(--secondary-color);
+  color: var(--primary-color);
+
+  padding: 20px;
+  text-align: center;
+
+  font:
+    600 18px 'Segoe UI',
+    Tahoma,
+    Geneva,
+    Verdana,
+    sans-serif;
+  border: var(--accent-color) 2px solid;
+
+  transition: all 0.4s ease;
+}
+.card_2 button {
+  width: auto;
+  height: 30px;
+  padding: 5px 10px;
+  background-color: var(--primary-color);
+  border-radius: 8px;
+  color: var(--bg-color);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin-top: 10px;
+}
+.card_2 button:hover {
+  background-color: var(--accent-color);
+  transition:
+    background-color 0.6s,
+    color 0.5s;
+}
+.card_2:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 6px 12px var(--accent-color);
+}
+
+.card_2 img {
+  width: 130px;
+  height: 100px;
+  object-fit: contain;
+}
+@media (max-width: 430px) {
+  .bar {
+    width: 90%;
+    margin-left: 5%;
+  }
+  .header nav a.active {
+    display: none;
+  }
+
+  .header {
+    width: 100%;
+  }
+  .header nav a {
+    display: none;
+    position: absolute;
+    top: 60px;
+    right: 10px;
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+    flex-direction: column;
+    width: 150px;
+  }
+  .burger {
+    display: block;
+    margin-left: 40%;
+    width: 40px;
+    height: 40px;
+    background-color: var(--primary-color);
+    border-radius: 5px;
+  }
+  .header nav a.active {
+    display: flex;
+  }
+
+  .side_manu {
+    top: 50px;
+    width: 160px;
+    padding: 10px;
+    gap: 10px;
+  }
+  .side_manu.active {
+    right: 5px;
+  }
+  .side_manu a {
+    font-size: 16px;
+    padding: 8px 0;
+  }
+  .side_manu a:hover {
+    background-color: var(--secondary-color);
+    color: #fff;
+  }
+}
