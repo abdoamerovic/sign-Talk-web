@@ -101,7 +101,7 @@ export default {
           router.push('/WillyHome')
         } else {
           // أحيانًا ممكن تاخد ثانية، نستخدم setTimeout صغير
-          setTimeout(() => router.push('/WillyHome'), 500)
+          setTimeout(() => router.push('/WillyHome'), 300)
         }
       } catch (error) {
         alert(error.message)

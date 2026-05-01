@@ -3,7 +3,7 @@
     <MainNavbar />
 
     <div class="return">
-      <router-link to="/ServiceS" class="back-link">← Back </router-link>
+      <router-link to="/ServiceS" class="back-link">← Back</router-link>
     </div>
 
     <section class="bar">
@@ -27,15 +27,13 @@
     </section>
 
     <div v-if="activeTab === 2 && selectedWord" class="selection-banner">
-      <p>
-        Currently viewing: <span>{{ selectedWord }}</span>
-      </p>
+      <p>Currently viewing: <span>{{ selectedWord }}</span></p>
     </div>
 
     <section v-if="activeTab === 1" class="contant">
       <div v-for="letter in alphabet" :key="letter.letter" class="card">
         <img :src="letter.img" :alt="'ASL Sign for ' + letter.letter" />
-        <h2>Alphabet {{ letter.letter }}</h2>
+        <h2>{{ letter.letter }}</h2>
       </div>
     </section>
 
@@ -46,10 +44,7 @@
         class="card_2_container"
         @click="selectedWord = word.text"
       >
-        <div
-          class="card_2_inner"
-          :class="{ 'is-flipped': flippedWord === word.text }"
-        >
+        <div class="card_2_inner" :class="{ 'is-flipped': flippedWord === word.text }">
           <div class="card-front" :class="{ 'active-card': selectedWord === word.text }">
             <img :src="word.img" :alt="word.text" />
             <h2>{{ word.text }}</h2>
@@ -81,36 +76,24 @@ import '@/assets/css/connect.css'
 
 export default {
   name: 'DectionAry',
-  components: {
-    MainNavbar,
-  },
+  components: { MainNavbar },
   setup() {
-    // UI State
-    const activeTab = ref(1) // 1 = Alphabet, 2 = Words
+    const activeTab   = ref(1)
     const selectedWord = ref('')
-    const flippedWord = ref('') // Tracks which card is currently flipped
-    const isOpen = ref(false)
+    const flippedWord  = ref('')
+    const isOpen       = ref(false)
 
-    const goBack = () => {
-      window.history.back()
-    }
+    const goBack = () => window.history.back()
 
-    // Toggle the flip animation
     const toggleFlip = (text) => {
-      // If the clicked card is already flipped, unflip it by setting to empty string
       flippedWord.value = flippedWord.value === text ? '' : text
     }
 
     const playAudio = (audioPath) => {
-      if (audioPath) {
-        // Add your audio logic here
-        console.log(`Playing ${audioPath}`)
-      } else {
-        alert("No audio available for this word.")
-      }
+      if (audioPath) console.log(`Playing ${audioPath}`)
+      else alert('No audio available for this word.')
     }
 
-    // Alphabet Data with Vite Asset Handling
     const alphabet = [
       { letter: 'A', img: new URL('@/assets/images/ASL-A.jpg', import.meta.url).href },
       { letter: 'B', img: new URL('@/assets/images/ASL-B.jpg', import.meta.url).href },
@@ -140,100 +123,97 @@ export default {
       { letter: 'Z', img: new URL('@/assets/images/ASL-Z-line.jpg', import.meta.url).href },
     ]
 
-    // Words Data
     const words = [
-      { text: 'hello', img: new URL('@/assets/images/hello.jpg', import.meta.url).href },
+      { text: 'hello',     img: new URL('@/assets/images/hello.jpg',     import.meta.url).href },
       { text: 'thank you', img: new URL('@/assets/images/thankyou.webp', import.meta.url).href },
-      { text: 'please', img: new URL('@/assets/images/please.webp', import.meta.url).href },
-      { text: 'sorry', img: new URL('@/assets/images/sorry.webp', import.meta.url).href },
-      { text: 'goodbye', img: new URL('@/assets/images/goodbye.webp', import.meta.url).href },
-      { text: 'yes', img: new URL('@/assets/images/yes.webp', import.meta.url).href },
-      { text: 'no', img: new URL('@/assets/images/no.gif', import.meta.url).href, audio: 'no.mp3' },
-      { text: 'family', img: new URL('@/assets/images/family.webp', import.meta.url).href },
-      { text: 'happy', img: new URL('@/assets/images/happy.webp', import.meta.url).href },
+      { text: 'please',    img: new URL('@/assets/images/please.webp',   import.meta.url).href },
+      { text: 'sorry',     img: new URL('@/assets/images/sorry.webp',    import.meta.url).href },
+      { text: 'goodbye',   img: new URL('@/assets/images/goodbye.webp',  import.meta.url).href },
+      { text: 'yes',       img: new URL('@/assets/images/yes.webp',      import.meta.url).href },
+      { text: 'no',        img: new URL('@/assets/images/no.gif',        import.meta.url).href },
+      { text: 'family',    img: new URL('@/assets/images/family.webp',   import.meta.url).href },
+      { text: 'happy',     img: new URL('@/assets/images/happy.webp',    import.meta.url).href },
       { text: 'dont wait', img: new URL('@/assets/images/dontwait.webp', import.meta.url).href },
-      { text: 'today', img: new URL('@/assets/images/today.webp', import.meta.url).href },
-      { text: 'science', img: new URL('@/assets/images/science.png', import.meta.url).href },
+      { text: 'today',     img: new URL('@/assets/images/today.webp',    import.meta.url).href },
+      { text: 'science',   img: new URL('@/assets/images/science.png',   import.meta.url).href },
     ]
 
-    return {
-      activeTab,
-      selectedWord,
-      flippedWord,
-      isOpen,
-      alphabet,
-      words,
-      toggleFlip,
-      playAudio,
-      goBack,
-    }
+    return { activeTab, selectedWord, flippedWord, isOpen, alphabet, words, toggleFlip, playAudio, goBack }
   },
 }
 </script>
 
 <style scoped>
-/* Tabs Navigation */
-.bar {
-  display: flex;
-  justify-content: center;
-  gap: 50px;
-  margin: 70px 0;
-  min-height: 60px;
-  background-color: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 4px 8px rgb(255, 204, 0);
-  width: 400px;
-  margin-left: auto;
-  margin-right: auto;
+*, *::before, *::after { box-sizing: border-box; }
+
+/* ── Page ───────────────────────────────────────────────────────────────────── */
+.dictionary-view {
+  min-height: 100vh;
+  background: #f5f7fa;
+  padding-bottom: 40px;
 }
 
-.nav_tab {
-  cursor: pointer;
-  text-align: center;
-}
-
-.nav_tab h1 {
-  font-size: 1.5rem;
-  margin-bottom: 5px;
-  transition: color 0.3s ease;
-}
-
-.underline {
-  height: 3px;
-  background-color: #e3a81f;
-  width: 100%;
-  border-radius: 2px;
-}
-
-/* Return Section */
+/* ── Back button ────────────────────────────────────────────────────────────── */
 .return {
   position: fixed;
-  top: 90px;
-  left: 20px;
+  top: 72px;
+  left: 14px;
   z-index: 1000;
-  background-color: var(--bg-color);
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  color: var(--primary-color);
-  widows: auto;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  padding: 6px 14px;
 }
 .back-link {
   text-decoration: none;
   color: #007bff;
   font-weight: bold;
-  width: 100%;
-  display: block;
+  font-size: 14px;
+  white-space: nowrap;
 }
-.back-link:hover {
-  color: #e3a81f;
+.back-link:hover { color: #e3a81f; }
+
+/* ── Tabs bar ───────────────────────────────────────────────────────────────── */
+.bar {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin: 80px auto 30px;   /* ✅ auto للـ margin الجانبي */
+  min-height: 60px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(255,204,0,0.5);
+  width: 90%;               /* ✅ مش ثابتة — بتتكيف مع الشاشة */
+  max-width: 400px;
+  padding: 0 10px;
 }
 
-/* Selection Banner */
+.nav_tab {
+  cursor: pointer;
+  text-align: center;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.nav_tab h1 {
+  font-size: clamp(1rem, 4vw, 1.4rem);  /* ✅ responsive font */
+  margin: 0 0 5px;
+  transition: color 0.3s;
+}
+.underline {
+  height: 3px;
+  background: #e3a81f;
+  width: 100%;
+  border-radius: 2px;
+}
+
+/* ── Selection banner ───────────────────────────────────────────────────────── */
 .selection-banner {
   background: #f8f9fa;
   padding: 10px;
   text-align: center;
-  margin: 10px 20px;
+  margin: 0 16px 10px;
   border-radius: 8px;
   border-left: 5px solid #e3a81f;
 }
@@ -243,122 +223,106 @@ export default {
   text-transform: uppercase;
 }
 
-/* Grids */
+/* ── Cards grid ─────────────────────────────────────────────────────────────── */
 .contant,
 .contant_2 {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
-  padding: 20px;
+  gap: 16px;
+  padding: 16px;
   justify-content: center;
 }
 
-/* --- Original Card (Alphabet Tab) --- */
+/* ── Alphabet card ──────────────────────────────────────────────────────────── */
 .card {
   background: white;
   border-radius: 12px;
-  padding: 15px;
+  padding: 12px;
   text-align: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  width: 180px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  width: clamp(130px, 28vw, 180px);   /* ✅ responsive width */
   cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 .card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgb(0, 140, 255);
-  transition: all 0.3s ease;
+  box-shadow: 0 8px 20px rgb(0,140,255);
 }
 .card img {
   width: 100%;
-  height: 140px;
+  height: clamp(100px, 20vw, 140px);
   object-fit: contain;
   border-radius: 8px;
 }
+.card h2 {
+  font-size: clamp(0.9rem, 3vw, 1.1rem);
+  margin: 8px 0 0;
+}
 
-/* --- 3D Flip Card Styles (Words Tab) --- */
+/* ── Flip card ──────────────────────────────────────────────────────────────── */
 .card_2_container {
-  background-color: transparent;
-  width: 180px;
-  height: 290px; /* Fixed height is important for 3D flips */
-  perspective: 1000px; /* Gives the 3D depth effect */
+  background: transparent;
+  width: clamp(140px, 42vw, 180px);   /* ✅ responsive */
+  height: 270px;
+  perspective: 1000px;
   cursor: pointer;
 }
 
 .card_2_inner {
   position: relative;
-  width: 100%;
-  height: 100%;
+  width: 100%; height: 100%;
   text-align: center;
   transition: transform 0.6s;
   transform-style: preserve-3d;
 }
+.is-flipped { transform: rotateY(180deg); }
 
-/* This class triggers the flip */
-.is-flipped {
-  transform: rotateY(180deg);
-}
-
-/* Common styling for both sides of the card */
 .card-front, .card-back {
   position: absolute;
-  width: 100%;
-  height: 100%;
-  -webkit-backface-visibility: hidden; /* Safari support */
-  backface-visibility: hidden; /* Hides the back when looking at the front */
+  width: 100%; height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
   border-radius: 12px;
-  padding: 15px;
+  padding: 12px;
   box-sizing: border-box;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
-/* Front Styling */
-.card-front {
-  background-color: white;
-}
-.card-front:hover {
-  box-shadow: 0 8px 20px rgb(0, 140, 255);
-  transition: box-shadow 0.3s ease;
-}
+.card-front { background: white; }
+.card-front:hover { box-shadow: 0 8px 20px rgb(0,140,255); }
 .card-front img {
   width: 100%;
-  height: 140px;
+  height: clamp(90px, 18vw, 140px);
   object-fit: contain;
   border-radius: 8px;
 }
+.card-front h2 {
+  font-size: clamp(0.8rem, 3vw, 1rem);
+  margin: 6px 0 0;
+}
 
-/* Back Styling */
 .card-back {
-  background-color: #f8f9fa;
-  transform: rotateY(180deg); /* Start rotated backwards */
+  background: #f8f9fa;
+  transform: rotateY(180deg);
   border: 2px solid #e3a81f;
   justify-content: center;
-  gap: 15px;
+  gap: 12px;
 }
-.card-back h2 {
-  color: #e3a81f;
-  margin-top: 0;
-}
-.state-message p {
-  font-size: 0.95rem;
-  margin: 5px 0;
-  color: #333;
-}
+.card-back h2 { color: #e3a81f; margin: 0; font-size: clamp(0.9rem, 3vw, 1.1rem); }
+.state-message p { font-size: 0.85rem; margin: 4px 0; color: #333; }
 
-.active-card {
-  border: 2px solid #e3a81f;
-}
+.active-card { border: 2px solid #e3a81f; }
 
-/* Buttons */
+/* ── Card buttons ───────────────────────────────────────────────────────────── */
 .card-actions {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
   margin-top: auto;
 }
-
 button {
   padding: 6px;
   border-radius: 6px;
@@ -366,20 +330,22 @@ button {
   background: white;
   color: #007bff;
   cursor: pointer;
-  font-size: 0.9rem;
-  transition: all 0.2s ease;
+  font-size: 0.85rem;
+  transition: all 0.2s;
+}
+button:hover { background: #007bff; color: white; }
+.btn-return { border-color: #e3a81f; color: #e3a81f; }
+.btn-return:hover { background: #e3a81f; color: white; }
+
+/* ── Mobile 480px ───────────────────────────────────────────────────────────── */
+@media (max-width: 480px) {
+  .bar { margin-top: 70px; gap: 10px; }
+  .contant, .contant_2 { gap: 12px; padding: 12px; }
 }
 
-button:hover {
-  background: #007bff;
-  color: white;
-}
-.btn-return {
-  border-color: #e3a81f;
-  color: #e3a81f;
-}
-.btn-return:hover {
-  background: #e3a81f;
-  color: white;
+/* ── Mobile 390px ───────────────────────────────────────────────────────────── */
+@media (max-width: 390px) {
+  .bar       { margin-top: 65px; }
+  .card_2_container { height: 250px; }
 }
 </style>

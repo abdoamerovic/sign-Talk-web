@@ -41,27 +41,29 @@
 
     <div class="stats-header">
       <h1 class="stats-title">Impact by the <span>Numbers</span></h1>
-      <p class="stats-subtitle">Real-time metrics showcasing our commitment to accessible communication</p>
+      <p class="stats-subtitle">
+        Real-time metrics showcasing our commitment to accessible communication
+      </p>
     </div>
 
     <section class="stats">
       <div class="stat-card">
         <span class="trend">+12%</span>
-        <h2>{{ stats.activeUsers.toLocaleString() }}+</h2>
+        <h2>{{ stats.activeUsers.toLocaleString() }}</h2>
         <h3>Active Users</h3>
         <p>Growing community</p>
       </div>
 
       <div class="stat-card">
         <span class="trend">+28%</span>
-        <h2>{{ stats.serviceUsage.toLocaleString() }}+</h2>
+        <h2>{{ stats.serviceUsage.toLocaleString() }}</h2>
         <h3>Service Usage</h3>
         <p>Monthly translations</p>
       </div>
 
       <div class="stat-card">
         <span class="trend">+19%</span>
-        <h2>{{ stats.signsTranslated.toLocaleString() }}+</h2>
+        <h2>{{ stats.signsTranslated.toLocaleString() }}</h2>
         <h3>Signs Translated</h3>
         <p>Successful conversations</p>
       </div>
@@ -91,10 +93,10 @@ export default {
   setup() {
     // Starts at 0 while waiting for Firebase to load the real numbers
     const stats = ref({
-      activeUsers: 0,
-      serviceUsage: 0,
-      signsTranslated: 0,
-      successRate: 0
+      activeUsers: 20,
+      serviceUsage: 55,
+      signsTranslated: 30,
+      successRate: 10,
     })
 
     // Connects directly to your Firebase document
@@ -106,13 +108,13 @@ export default {
         if (docSnap.exists()) {
           stats.value = docSnap.data()
         } else {
-          console.error("Statistics document not found in Firebase database.")
+          console.error('Statistics document not found in Firebase database.')
         }
       })
     })
 
     return {
-      stats
+      stats,
     }
   },
 }
@@ -202,6 +204,7 @@ export default {
   transition: transform 0.3s ease;
   box-shadow: 4px 4px 8px rgba(255, 221, 0, 0.888);
 }
+
 /* Statistics Header */
 .stats-header {
   text-align: center;
@@ -216,7 +219,12 @@ export default {
 .stats-title span {
   color: #e3a81f;
   font-weight: bold;
-  font: 40px 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font:
+    40px 'Segoe UI',
+    Tahoma,
+    Geneva,
+    Verdana,
+    sans-serif;
 }
 
 .stats-subtitle {
@@ -290,15 +298,12 @@ export default {
 /* CTA Section */
 .cta-section {
   text-align: center;
-  margin-top: 100px;
-  margin-bottom: 50px;
   padding: 60px 20px;
-  background: linear-gradient(135deg, #007bff, #00BFFF);
+  margin: 100px auto 50px;
+  background: linear-gradient(135deg, #007bff, #00bfff);
   border-radius: 20px;
   color: white;
   max-width: 1100px;
-  margin-left: auto;
-  margin-right: auto;
   box-shadow: 0 10px 30px rgba(0, 123, 255, 0.2);
   border: 1px solid #ffffff;
 }
@@ -323,9 +328,10 @@ export default {
   font-size: 18px;
   font-weight: bold;
   text-decoration: none;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-  border:
-  1px solid #ffffff;
+  transition:
+    background-color 0.3s ease,
+    transform 0.2s ease;
+  border: 1px solid #ffffff;
 }
 
 .cta-button:hover {

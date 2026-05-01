@@ -31,9 +31,13 @@
       <div class="chat_ai">
         <img src="@/assets/images/quiz.jpg" />
         <h3>AI Chat</h3>
-        <p>Smart assistant for sign language communication.</p>
-        <button @click="goAI">Lets understand</button>
+        <P> we work in start up model of AI right now</P>
+
+        <button @click="goAI" :disabled="isThinking">
+          {{ isThinking ? "work for update..." : "Talk to AI" }}
+        </button>
       </div>
+
       <div class="c_w_s">
         <img src="@/assets/images/quiz.jpg" alt="Support Icon" />
         <h3>Human Support</h3>
@@ -46,37 +50,50 @@
     </section>
 
     <div class="finshing">
-      <h1>thats which we are provide now</h1>
       <h2>wait more ...</h2>
     </div>
   </section>
 </template>
 
 <script>
+import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+// Import the Gemini package you just installed
+
 
 export default {
   name: 'ServiceS',
   setup() {
     const router = useRouter()
+
+    // Reactive variables for the inline AI
+    const aiResponse = ref('')
+    const isThinking = ref(false)
+
     const goDictionary = () => {
-      router.push({ name: 'dec' })
+      router.push({ name: 'Dec' })
     }
+
     const goVideo = () => {
       router.push({ name: 'Video' })
-      // Add your video translation navigation logic here
     }
+
     const goText = () => {
       router.push({ name: 'SomeVideo' })
     }
+
+    // 🔥 The function that fetches AI data without leaving the page
     const goAI = () => {
-      window.open('https://gemini.google.com/', '_blank')
+      router.push({ name: 'AIChat' })
     }
+
     return {
       goDictionary,
       goVideo,
       goText,
       goAI,
+      aiResponse,
+      isThinking
     }
   },
 }
@@ -84,12 +101,13 @@ export default {
 
 <style scoped>
 :root {
-  --primary-color: #007bff; /* أزرق أساسي */
-  --secondary-color: #00bfff; /* أزرق فاتح */
-  --accent-color: #e3a81f; /* بنى فاتح */
-  --bg-color: #ffffff; /* خلفية بيضاء */
-  --text-color: #545454; /* نص داكن */
+  --primary-color: #007bff;
+  --secondary-color: #00bfff;
+  --accent-color: #e3a81f;
+  --bg-color: #ffffff;
+  --text-color: #545454;
 }
+
 body {
   background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
   color: var(--text-color);
@@ -102,6 +120,7 @@ body {
   min-height: 100vh;
   display: block;
 }
+
 .cont_info {
   max-width: 1200px;
   margin: 0 auto;
@@ -123,9 +142,12 @@ body {
   justify-content: center;
   gap: 25px;
 }
-.kol{font-size: 50px; /* كبره زي ما تحب */
+
+.kol {
+  font-size: 50px;
   display: inline-block;
-  transform: scale(1.7);}
+  transform: scale(1.7);
+}
 
 .cont_info p::before,
 .cont_info p::after {
@@ -153,12 +175,14 @@ body {
     box-shadow: 0 0 10px var(--accent-color);
   }
 }
+
 .cont_card {
   display: flex;
   gap: 30px;
   flex-wrap: wrap;
   justify-content: space-evenly;
 }
+
 .video_trans,
 .dictionary,
 .tosign,
@@ -172,18 +196,18 @@ body {
   color: var(--primary-color);
   font-size: 17px;
   border: 3px solid var(--accent-color);
-  border-radius: 15px;
   padding: 20px;
 }
+
 .cont_card img {
   width: 70px;
   height: 70px;
   border-radius: 15px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
+
 .cont_card button {
   width: 100%;
-
   margin-top: 15px;
   padding: 10px 20px;
   background-color: var(--primary-color);
@@ -197,6 +221,12 @@ body {
 .cont_card button:active {
   transform: scale(0.98);
 }
+
+.cont_card button:disabled {
+  background-color: #a0a0a0;
+  cursor: not-allowed;
+}
+
 .video_trans:hover,
 .dictionary:hover,
 .c_w_s:hover,
@@ -208,12 +238,26 @@ body {
   color: var(--bg-color);
   opacity: 0.9;
 }
+
 .cont_card:has(.video_trans:hover, .dictionary:hover, .c_w_s:hover, .chat_ai:hover, .tosign)
-  button {
+  button:not(:disabled) {
   background-color: var(--bg-color);
   color: var(--primary-color);
   border: 2px solid var(--bg-color);
 }
+
+/* 🔥 The new style for the generated AI text */
+.ai-text {
+  color: var(--primary-color);
+  font-weight: bold;
+  font-size: 14px;
+  background-color: #f0f0f0;
+  padding: 10px;
+  border-radius: 6px;
+  margin-top: 10px;
+  line-height: 1.4;
+}
+
 .return {
   width: 80px;
   height: 35px;
@@ -227,12 +271,14 @@ body {
   left: 20px;
   z-index: 1000;
 }
+
 .return a {
   text-decoration: none;
   color: var(--primary-color);
   font-size: 19px;
   font-weight: bold;
 }
+
 .return a:hover {
   color: var(--accent-color);
   transition:
@@ -243,6 +289,7 @@ body {
 .cont_card {
   perspective: 1200px;
 }
+
 .video_trans,
 .dictionary,
 .tosign,
@@ -253,6 +300,7 @@ body {
     transform 0.6s ease,
     box-shadow 0.6s ease;
 }
+
 .video_trans:hover,
 .dictionary:hover,
 .c_w_s:hover,
@@ -263,6 +311,7 @@ body {
     0 25px 45px var(--bg-color),
     inset 0 0 25px var(--secondary-color);
 }
+
 .finshing {
   font-size: medium;
   margin-top: 4%;
@@ -270,11 +319,11 @@ body {
   text-align: center;
   align-items: center;
 }
+
 @media (max-width: 430px) {
   .header nav a.active {
     display: none;
   }
-
   .header {
     width: 100%;
   }
@@ -297,7 +346,6 @@ body {
   .header nav a.active {
     display: flex;
   }
-
   .side_manu {
     top: 50px;
     width: 160px;

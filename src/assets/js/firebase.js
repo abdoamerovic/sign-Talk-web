@@ -16,3 +16,11 @@ const app = initializeApp(firebaseConfig);
 
 export const auth = getAuth(app);
 export const db = getFirestore(app);
+
+// ✅ Resolves once Firebase knows if a user is logged in or not
+export const authReady = new Promise((resolve) => {
+  const unsubscribe = auth.onAuthStateChanged((user) => {
+    unsubscribe();
+    resolve(user);
+  });
+});

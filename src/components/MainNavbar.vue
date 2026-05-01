@@ -1,46 +1,131 @@
 <template>
-  <header class="header">
-    <img src="../assets/images/logo.png" class="logo" />
+   <div>
+    <!-- Blur overlay — click to close sidebar -->
+    <div class="overlay" :class="{ active: isOpen }" @click="closeMenu"></div>
+
+    <header class="header" :class="{ hidden: isHidden }">
+    <!-- Logo → goes to Home -->
+    <img
+      src="../assets/images/logo.png"
+      class="logo"
+      @click="goHome"
+      style="cursor: pointer"
+    />
 
     <nav>
-      <router-link to="/">Home</router-link>
+      <router-link to="/WillyHome">Home</router-link>
       <router-link to="/ServiceS">Services</router-link>
       <router-link to="/AboutUss">About</router-link>
       <router-link to="/ConnectUss">ConnectUs</router-link>
     </nav>
 
     <div class="burger" @click="toggleMenu">☰</div>
-
-    <div class="side_manu" :class="{ active: isOpen }">
-      <router-link to="/" @click="closeMenu">Home</router-link>
-      <router-link to="/ServiceS" @click="closeMenu">Services</router-link>
-      <router-link to="/AboutUss" @click="closeMenu">About</router-link>
-      <router-link to="/ConnectUss" @click="closeMenu">ConnectUs</router-link>
-    </div>
   </header>
+
+  <!-- Sidebar — full screen height -->
+  <div class="side_manu" :class="{ active: isOpen }">
+
+    <!-- Top: logo + close button -->
+    <div class="side_top">
+      <img src="../assets/images/logo.png" class="side_logo" @click="goHome" />
+      <span class="close_btn" @click="closeMenu">✕</span>
+    </div>
+
+    <hr class="divider" />
+
+    <!-- Nav links -->
+    <router-link to="/WillyHome"  @click="closeMenu"> Home</router-link>
+    <router-link to="/ServiceS"   @click="closeMenu"> Services</router-link>
+    <router-link to="/AboutUss"   @click="closeMenu"> About</router-link>
+    <router-link to="/ConnectUss" @click="closeMenu"> Connect Us</router-link>
+
+    <!-- Spacer pushes logout to bottom -->
+    <div class="spacer"></div>
+
+    <hr class="divider" />
+
+    <!-- Logout -->
+    <button class="logout_btn" @click="logout"> Logout</button>
+  </div>
+  </div>
+
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
+import { useRouter } from 'vue-router'
+import { getAuth, signOut } from 'firebase/auth'
 
 export default {
+  name: 'MainNavbar',
   setup() {
-    const isOpen = ref(false)
+    const router   = useRouter()
+    const isOpen   = ref(false)
+    const isHidden = ref(false)
 
-    const toggleMenu = () => {
-      isOpen.value = !isOpen.value
+    // ── Sidebar ──────────────────────────────────────────────────────────────
+    const toggleMenu = () => { isOpen.value = !isOpen.value }
+    const closeMenu  = () => { isOpen.value = false }
+
+    // ── Logo click → Home ────────────────────────────────────────────────────
+    const goHome = () => {
+      closeMenu()
+      router.push({ name: 'WelliCome' })
     }
 
-    const closeMenu = () => {
-      isOpen.value = false
+    // ── Logout ───────────────────────────────────────────────────────────────
+    const logout = async () => {
+      try {
+        await signOut(getAuth())
+        closeMenu()
+        router.push({ name: 'LogIn' })
+      } catch (err) {
+        console.error('Logout error:', err)
+      }
     }
 
-    return { isOpen, toggleMenu, closeMenu }
+    // ── Hide navbar on scroll up, show on scroll down ────────────────────────
+    let lastScroll = 0
+    const handleScroll = () => {
+      const current = window.scrollY
+      isHidden.value = current > lastScroll && current > 60
+      lastScroll = current
+    }
+
+    onMounted(()  => window.addEventListener('scroll', handleScroll))
+    onUnmounted(() => window.removeEventListener('scroll', handleScroll))
+
+    return { isOpen, isHidden, toggleMenu, closeMenu, goHome, logout }
   },
 }
 </script>
 
 <style scoped>
+/* ── Variables ─────────────────────────────────────────────────────────────── */
+:root {
+  --primary-color:   #007bff;
+  --secondary-color: #00bfff;
+  --accent-color:    #e3a81f;
+  --text-color:      #333;
+}
+
+/* ── Overlay / Blur ────────────────────────────────────────────────────────── */
+.overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+  z-index: 1100;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.overlay.active {
+  display: block;
+  opacity: 1;
+}
+
+/* ── Header ────────────────────────────────────────────────────────────────── */
 .header {
   width: 100%;
   height: 60px;
@@ -54,136 +139,154 @@ export default {
   background: white;
   box-shadow: 2px 4px 10px rgba(253, 199, 2, 0.897);
   z-index: 1000;
+  transition: transform 0.3s ease;
 }
-.header nav a {
-  text-decoration: none;
-  color: var(--text-color);
-  margin: 0 15px;
-  font-size: 16px;
-  font-weight: bold;
-}
-.header nav a:hover {
-  color: var(--accent-color);
-  transition:
-    background-color 0.6s,
-    color 0.5s;
-  border-bottom: 4px solid var(--primary-color);
-  font-size: 20px;
-}
-.header nav a.active {
-  color: var(--accent-color);
-  transition:
-    background-color 0.6s,
-    color 0.5s;
-  border-bottom: 4px solid var(--primary-color);
-  font-size: 20px;
+
+/* Hide on scroll up */
+.header.hidden {
+  transform: translateY(-100%);
 }
 
 .logo {
   height: 50px;
 }
 
+/* ── Desktop nav ───────────────────────────────────────────────────────────── */
 nav {
   display: flex;
   gap: 20px;
 }
-
 nav a {
   text-decoration: none;
-  color: #333;
+  color: var(--text-color);
   font-weight: bold;
+  font-size: 16px;
+  padding-bottom: 4px;
+  transition: color 0.3s, border-bottom 0.3s, font-size 0.2s;
 }
-
+nav a:hover,
 nav a.router-link-active {
-  color: #007bff;
-  border-bottom: 2px solid #007bff;
+  color: var(--accent-color);
+  border-bottom: 3px solid var(--primary-color);
+  font-size: 18px;
 }
 
+/* ── Burger ────────────────────────────────────────────────────────────────── */
 .burger {
   display: none;
   font-size: 28px;
   cursor: pointer;
+  color: var(--primary-color);
 }
 
+/* ── Sidebar ───────────────────────────────────────────────────────────────── */
 .side_manu {
   position: fixed;
-  top: 70px;
-  right: -220px;
-  width: 180px;
+  top: 0;
+  right: -300px;          /* hidden by default */
+  width: 260px;
+  height: 100vh;           /* full screen height */
   background: white;
   display: flex;
   flex-direction: column;
   padding: 20px;
-  gap: 15px;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
-  border-radius: 10px;
-  transition: right 0.3s ease;
+  gap: 8px;
+  box-shadow: -4px 0 20px rgba(0, 0, 0, 0.15);
+  z-index: 1200;
+  transition: right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow-y: auto;
 }
-
 .side_manu.active {
-  right: 10px;
+  right: 0;
 }
 
+/* Top section: logo + close */
+.side_top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.side_logo {
+  height: 42px;
+  cursor: pointer;
+}
+.close_btn {
+  font-size: 22px;
+  cursor: pointer;
+  color: #999;
+  transition: color 0.2s;
+}
+.close_btn:hover {
+  color: var(--accent-color);
+}
+
+/* Divider */
+.divider {
+  border: none;
+  border-top: 1px solid #eee;
+  margin: 2px 0;
+}
+
+/* Links */
 .side_manu a {
   text-decoration: none;
-  color: #007bff;
+  color: var(--primary-color);
   font-weight: bold;
+  font-size: 17px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  transition: background 0.2s, color 0.2s, padding-left 0.2s;
+}
+.side_manu a:hover,
+.side_manu a.router-link-active {
+  background: rgba(0, 123, 255, 0.08);
+  color: var(--accent-color);
+  padding-left: 20px;
+  border-left: 3px solid var(--accent-color);
 }
 
-/* 🔥 Mobile */
+/* Spacer */
+.spacer {
+  flex: 1;
+}
+
+/* Logout button */
+.logout_btn {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(135deg, #ff4d4d, #cc0000);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.2s;
+  margin-bottom: 10px;
+}
+.logout_btn:hover {
+  opacity: 0.88;
+  transform: scale(0.98);
+}
+
+/* ── Mobile ────────────────────────────────────────────────────────────────── */
 @media (max-width: 768px) {
   nav {
     display: none;
   }
-
   .burger {
     display: block;
   }
 }
+
 @media (max-width: 430px) {
-  .header nav a.router-link-active {
-    display: none;
-  }
-
   .header {
-    width: 100%;
+    padding: 10px 15px;
   }
-  .header nav a {
-    display: none;
-    position: absolute;
-    top: 60px;
-    right: 10px;
-    background: white;
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
-    flex-direction: column;
-    width: 150px;
-  }
-  .burger {
-    display: block;
-    margin-left: 40%;
-  }
-  .header nav a.router-link-active {
-    display: flex;
-  }
-
   .side_manu {
-    top: 50px;
-    width: 160px;
-    padding: 10px;
-    gap: 10px;
-  }
-  .side_manu.active {
-    right: 5px;
-  }
-  .side_manu a {
-    font-size: 16px;
-    padding: 8px 0;
-  }
-  .side_manu a:hover {
-    background-color: var(--secondary-color);
-    color: #fff;
+    width: 70vw;
+    right: -400px;      /* 75% of screen width on small phones */
   }
 }
 </style>

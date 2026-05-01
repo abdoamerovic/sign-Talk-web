@@ -111,7 +111,7 @@
   margin-right: 45%;
   font-size: 58px;
   font-weight: bolder;
-  background: linear-gradient(70deg,  var(--bg-color),var(--primary-color));
+  background: linear-gradient(70deg, var(--bg-color), var(--primary-color));
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -141,9 +141,8 @@
   color: var(--accent-color);
   font-size: 26px;
 }
-.conti{
+.conti {
   background-color: var(--bg-color);
-
 }
 .container_features {
   display: flex;
@@ -189,9 +188,8 @@
   margin-bottom: 15px;
   border-radius: 50%;
   object-fit: cover;
-
 }
-.lio{
+.lio {
   text-align: center;
   font-size: 32px;
   font-weight: bold;
@@ -203,7 +201,7 @@
   color: var(--primary-color);
   transition: color 0.3s ease;
 }
-.lio::after{
+.lio::after {
   content: '';
   display: block;
   width: 70px;
@@ -328,17 +326,16 @@ footer h1 {
 }
 .s_2 {
   color: var(--secondary-color);
-    font-size: 28px;
-    margin-left: 2%;
+  font-size: 28px;
+  margin-left: 2%;
 }
 .s_3 {
   color: var(--accent-color);
-    font-size: 28px;
-    margin-left: 2%;
+  font-size: 28px;
+  margin-left: 2%;
 }
 .social-icon:hover {
   transform: scale(1.2);
-
 }
 footer p {
   text-align: center;
@@ -372,15 +369,14 @@ footer p span {
     margin-right: 0%;
     margin-top: -40%;
     position: relative;
-    top: 210px;
-
+    top: -20px;
   }
   .welcome_bdg h2 {
     font-size: 40px;
     margin-right: 0%;
-  margin-bottom: 10%;
-  position: relative;
-  top: 190px;
+    margin-bottom: 10%;
+    position: relative;
+    top: 190px;
   }
   .btn {
     position: relative;
@@ -430,7 +426,7 @@ footer p span {
     background-color: var(--secondary-color);
     color: #fff;
   }
-  .container_features{
+  .container_features {
     display: block;
     gap: 30px;
     margin-bottom: 20px;
@@ -439,11 +435,11 @@ footer p span {
     width: 100%;
     margin-bottom: 20px;
   }
-  .terminal{
+  .terminal {
     width: 100%;
   }
   .about {
     width: 100%;
-    font:16px sans-serif;
+    font: 16px sans-serif;
   }
 }
