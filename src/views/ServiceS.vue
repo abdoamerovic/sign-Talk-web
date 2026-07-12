@@ -70,7 +70,7 @@ export default {
       router.push({ name: 'SomeVideo' })
     }
     const goAI = () => {
-      window.open('https://gemini.google.com/', '_blank')
+      router.push({ name: 'Chat' })
     }
     return {
       goDictionary,

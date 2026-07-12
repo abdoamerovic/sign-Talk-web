@@ -25,6 +25,7 @@ const routes = [
   { path: '/VideoCall', name: 'Video', component: Video, meta: { requiresAuth: true } },
   { path: '/TexttoSign', name: 'avatar', component: avatar, meta: { requiresAuth: true } },
   { path: '/SomeVideo', name: 'SomeVideo', component: SomeVideo, meta: { requiresAuth: true } },
+  { path:'/Chat.vue', name: 'Chat', component: () => import('../views/Chat.vue'), meta: { requiresAuth: true } }
 ]
 
 const router = createRouter({
